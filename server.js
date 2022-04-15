@@ -18,6 +18,12 @@ app.get("/", function (req, res) {
   res.sendFile(__dirname + '/views/index.html');
 });
 
+app.get("/api", (req,res)=>{
+  let unix = Date.now();
+  let time = new Date(unix);
+
+  res.json({"unix":unix, "utc":time.toUTCString()})
+})
 
 // listen for requests :)
 const listener = app.listen(3000 || process.env.PORT,()=>{

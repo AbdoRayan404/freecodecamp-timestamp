@@ -43,6 +43,13 @@ app.get("/api/:time", (req,res)=>{
 
     res.json({"unix":unix,"utc":dateNow.toUTCString()})
   }
+  //if it's parseable INT (negative or positive) then it's a UNIX epoch
+  else if(Number.parseInt(req.params.time)){
+    let parsedInt = Number.parseInt(req.params.time)
+    let date = new Date(parsedInt).toUTCString()
+    
+    res.json({"unix":parsedInt,"utc":date})
+  }
   else{
     res.json({"error":"Invalid Date"});
   }

@@ -29,7 +29,7 @@ app.get("/api", (req,res)=>{
 app.get("/api/:time", (req,res)=>{
 
   //check if it's a valid date using Regex & Check if days are 31 or lower
-  if(req.params.time.match(/[0-9][0-9][0-9][0-9]-1[0-2]-[1-3][0-9]/) || req.params.time.match(/[0-9][0-9][0-9][0-9]-[1-9]-[1-3][0-9]/) && Number.parseInt(req.params.time.split("-")[2]) <= 31){
+  if(req.params.time.match(/[1-2]\d\d\d-(1[0-2]|[1-9])-([1-3][0-9]|[1-9])/)){
     let dateSplitted = req.params.time.split("-");
     let year = dateSplitted[0]
     let month = dateSplitted[1]

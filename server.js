@@ -28,15 +28,11 @@ app.get("/api", (req,res)=>{
 
 app.get("/api/:time", (req,res)=>{
 
-  //check if it's a valid date using Regex & Check if days are 31 or lower
-  if(req.params.time.match(/[1-2]\d\d\d-(1[0-2]|[1-9])-([1-3][0-9]|[1-9])/)){
-    let dateSplitted = req.params.time.split("-");
-    let year = dateSplitted[0]
-    let month = dateSplitted[1]
-    let day = dateSplitted[2]
+  //check if it's a valid date using Date.parse
+  if(!isNaN(Date.parse(req.params.time))){
 
-    //intilize time in UTC timezone
-    let dateNow = new Date(`${year}-${month}-${day} 00:00:00 UTC`);
+    //intilize time
+    let dateNow = new Date(req.params.time);
     //conver it to UNIX
     let unix = Date.parse(dateNow)
 
